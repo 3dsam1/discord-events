@@ -1,0 +1,18 @@
+{
+  "name": "discord_event_status",
+  "version": "1.0.1",
+  "description": "Get's the list of indiivduals who joined a Discord event, and publishes them with the time.",
+  "main": "main.js",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.10.0",
+    "path": "^0.12.7"
+  },
+  "scripts": {
+    "test": "echo \"testing\" && exit 1",
+    "test2": "node test.js && exit 1"
+  },
+  "author": "3dsam1",
+  "license": "ISC"
+}

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose-windows-amd64.exe convert
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: discord-event-bot-mongo-dev
+  name: discord-event-bot-mongo-dev
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: discord-event-bot-mongo-dev
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose-windows-amd64.exe convert
+        kompose.version: 1.30.0 (9d8dcb518)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/downloads-default: "true"
+        io.kompose.service: discord-event-bot-mongo-dev
+    spec:
+      containers:
+          image: mongo
+          imagePullPolicy: Always
+          name: discord-event-bot-mongo-dev
+          envFrom:
+          - secretRef:
+              name: discord-event-bot-dev-secrets
+          resources: {}
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: regcred
+status: {}

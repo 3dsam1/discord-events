@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  app:
+    image: registry.edgegamers.io/discord/discord-event-bot:dev
+    container_name: discord_event_status
+    restart: always
+    links:
+      - mongo
+    env_file:
+      - .env
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    env_file:
+      - .env
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:

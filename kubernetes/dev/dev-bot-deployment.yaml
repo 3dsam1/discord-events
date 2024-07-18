@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose-windows-amd64.exe convert
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: discord-event-bot-dev
+  name: discord-event-bot-dev
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: discord-event-bot-dev
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose-windows-amd64.exe convert
+        kompose.version: 1.30.0 (9d8dcb518)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/downloads-default: "true"
+        io.kompose.service: discord-event-bot-dev
+    spec:
+      containers:
+          image: registry.edgegamers.io/discord/discord-event-bot:dev
+          name: discord-event-status
+          resources: {}
+          envFrom:
+            - secretRef:
+              name: discord-event-bot-dev-secrets
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: regcred
+status: {}
